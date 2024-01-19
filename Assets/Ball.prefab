@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 9081627752046819643}
   - component: {fileID: 954376695448339735}
   - component: {fileID: 8596134713303427209}
-  - component: {fileID: 4870666906698683495}
-  - component: {fileID: 4805727792627153288}
+  - component: {fileID: 1823902786759178552}
+  - component: {fileID: 818013058751732875}
   m_Layer: 0
   m_Name: Ball
   m_TagString: Untagged
@@ -150,7 +150,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &4870666906698683495
+--- !u!114 &1823902786759178552
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -159,14 +159,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 7513153542622048063}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8333901ff8befd43853e561d518cd5c, type: 3}
+  m_Script: {fileID: 11500000, guid: 050bd5ff3ebe93f4aa5e36b9f9548146, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trajectoryDotPrefab: {fileID: 356474399866109497, guid: ddabc2c999bcde44c8156694e89cce1a, type: 3}
-  maxStretch: 20.12
-  minDotSpacing: 0.1
-  maxDotSpacing: 0.5
---- !u!114 &4805727792627153288
+  rb: {fileID: 0}
+  col: {fileID: 0}
+--- !u!114 &818013058751732875
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -175,6 +173,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 7513153542622048063}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0288c73304776d847986e73cd8d910e4, type: 3}
+  m_Script: {fileID: 11500000, guid: 0d4d9483f8e17fb40abddf336631c7ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ball: {fileID: 1823902786759178552}
+  trajectory: {fileID: 0}
+  pushForce: 2

@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class GameManager : MonoBehaviour
 {
 	#region Singleton class: GameManager
 
 	public static GameManager Instance;
+	private bool isStuck = false;
+	[SerializeField] public CinemachineVirtualCamera vCam;
 
 	void Awake()
 	{
@@ -89,5 +92,27 @@ public class GameManager : MonoBehaviour
 		ball.Push(force);
 
 		trajectory.Hide();
+	}
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+		if (collision.gameObject.tag == "GreenPad" && !isStuck)
+		{
+			// Stop the ball's movement
+			isStuck = true;
+			GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+		}
+		if(collision.gameObject.tag == "Room1" || collision.gameObject.tag == "Room2")
+        {
+			vCam.Follow = collision.transform;
+        }
+	}
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+		if (collision.gameObject.tag == "GreenPad" && isStuck)
+		{
+			// Stop the ball's movement
+			isStuck = false;
+		}
 	}
 }
