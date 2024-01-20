@@ -9,9 +9,6 @@ public class AudioManager : MonoBehaviour
     [SerializeField] public AudioSource SwampSource;
     [SerializeField] public AudioSource FinalSource;
     [SerializeField] public string scene;
-    public GameObject VoiceOff;
-    public GameObject VoiceOn;
-    static AudioManager instance;
 
     public AudioClip CemetaryMusic;
     public AudioClip ChurchMusic;
@@ -32,31 +29,6 @@ public class AudioManager : MonoBehaviour
         {
             CemetarySource.clip = CemetaryMusic;
             CemetarySource.Play();
-        }
-    }
-
-    private void Awake()
-    {
-        VoiceOff = GameObject.FindWithTag("VoiceOff");
-        VoiceOn = GameObject.FindWithTag("VoiceOn");
-    }
-
-    private void Update()
-    {
-        if(VoiceOn.activeSelf)
-        {
-            isMusicOn = true;
-            if(!FinalSource.isPlaying)
-            {
-                PlayFinal();
-            }
-            // Volume a�
-        }
-        else if(VoiceOff.activeSelf)
-        {
-            isMusicOn = false;
-            StopAll();
-            // Volume kapa
         }
     }
 
