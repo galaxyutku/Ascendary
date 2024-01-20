@@ -32,8 +32,10 @@ public class GameManager : MonoBehaviour
 	private SpriteRenderer spriteRenderer;
 	[SerializeField] GameObject pauseMenu;
 	public static bool GameIsPaused = false;
+	[SerializeField] AudioManager audioManager;
 
 	bool isDragging = false;
+	bool isDraggable = true;
 
 	Vector2 startPoint;
 	Vector2 endPoint;
@@ -53,28 +55,33 @@ public class GameManager : MonoBehaviour
 
 	void Update()
 	{
-		if (Input.GetMouseButtonDown(0))
-		{
-			isDragging = true;
-			OnDragStart();
-		}
-		if (Input.GetMouseButtonUp(0))
-		{
-			isDragging = false;
-			OnDragEnd();
-		}
+		if(isDraggable)
+		{ 
+			if (Input.GetMouseButtonDown(0))
+			{
+				isDragging = true;
+				OnDragStart();
+			}
+			if (Input.GetMouseButtonUp(0))
+			{
+				isDragging = false;
+				OnDragEnd();
+			}
 
-		if (isDragging)
-		{
-			OnDrag();
+			if (isDragging)
+			{
+				OnDrag();
+			}
 		}
 
 		if (rb.velocity == Vector2.zero)
         {
 			animator.SetBool("isJumping", false);
+			isDraggable = true;
 		}
 		else
         {
+			isDraggable = false;
 			if (rb.velocity.x < 0)
 			{
 				// Moving to the left
@@ -126,6 +133,14 @@ public class GameManager : MonoBehaviour
 	{
 		//push the ball
 		ball.ActivateRb();
+		if(force.x > 12)
+        {
+			force.x = 12;
+        }
+		if(force.y > 12)
+        {
+			force.y = 12;
+        }
 
 		ball.Push(force);
 
@@ -139,8 +154,33 @@ public class GameManager : MonoBehaviour
 			isStuck = true;
 			GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 		}
-		if(collision.gameObject.tag == "Room1" || collision.gameObject.tag == "Room2")
+		if(collision.gameObject.tag == "Room1" || collision.gameObject.tag == "Room2" || collision.gameObject.tag == "Room5" || collision.gameObject.tag == "Room6" || collision.gameObject.tag == "Room10" || collision.gameObject.tag == "Room11" || collision.gameObject.tag == "Room15" || collision.gameObject.tag == "Room16")
         {
+			if(collision.gameObject.tag == "Room6")
+            {
+				if (!audioManager.ChurchSource.isPlaying)
+                {
+					audioManager.StopAll();
+					audioManager.PlayChurch();
+                }
+            }
+			else if (collision.gameObject.tag == "Room11")
+			{
+				if (!audioManager.SwampSource.isPlaying)
+                {
+					audioManager.StopAll();
+					audioManager.PlaySwamp();
+                }
+			}
+			else if (collision.gameObject.tag == "Room16")
+			{
+				if (!audioManager.FinalSource.isPlaying)
+				{
+					audioManager.StopAll();
+					audioManager.PlayFinal();
+				}
+			}
+			Debug.Log(collision.gameObject.name);
 			vCam.Follow = collision.transform;
         }
 	}

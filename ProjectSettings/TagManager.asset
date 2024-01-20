@@ -9,6 +9,16 @@ TagManager:
   - Room2
   - Room3
   - Obstacle
+  - AudioManager
+  - Room6
+  - Room5
+  - Room10
+  - Room11
+  - Room15
+  - Room16
+  - VoiceOn
+  - VoiceOff
+  - Ending
   layers:
   - Default
   - TransparentFX
