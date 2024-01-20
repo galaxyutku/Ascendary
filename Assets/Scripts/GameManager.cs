@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour
 	[SerializeField] GameObject pauseMenu;
 	public static bool GameIsPaused = false;
 	[SerializeField] AudioManager audioManager;
+	[SerializeField] GameObject End;
 
 	bool isDragging = false;
 	bool isDraggable = true;
@@ -183,6 +184,15 @@ public class GameManager : MonoBehaviour
 			Debug.Log(collision.gameObject.name);
 			vCam.Follow = collision.transform;
         }
+
+		if (collision.gameObject.tag == "Ending")
+		{
+			if (End != null)
+			{
+				End.SetActive(true);
+				Time.timeScale = 0;
+			}
+		}
 	}
 
     private void OnTriggerExit2D(Collider2D collision)

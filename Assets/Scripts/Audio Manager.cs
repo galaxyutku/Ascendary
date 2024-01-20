@@ -50,7 +50,7 @@ public class AudioManager : MonoBehaviour
             {
                 PlayFinal();
             }
-            // Volume aç
+            // Volume aï¿½
         }
         else if(VoiceOff.activeSelf)
         {
