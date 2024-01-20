@@ -69,7 +69,6 @@ public class GameManager : MonoBehaviour
 		if (rb.velocity == Vector2.zero)
         {
 			animator.SetBool("isJumping", false);
-			animator.SetBool("isFalling", false);
 		}
 		else
         {
@@ -82,16 +81,7 @@ public class GameManager : MonoBehaviour
 			{
 				spriteRenderer.flipX = false;
 			}
-			if(rb.velocity.y >= 0)
-            {
-				animator.SetBool("isJumping", true);
-				animator.SetBool("isFalling", false);
-            }
-            else if(rb.velocity.y < 0)
-            {
-				animator.SetBool("isFalling", true);
-				animator.SetBool("isJumping", false);
-			}
+			animator.SetBool("isJumping", true);
 		}
 
 	}
