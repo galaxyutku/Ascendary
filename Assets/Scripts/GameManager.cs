@@ -81,7 +81,7 @@ public class GameManager : MonoBehaviour
 		}
 		else
         {
-			isDraggable = false;
+			isDraggable = true;
 			if (rb.velocity.x < 0)
 			{
 				// Moving to the left
