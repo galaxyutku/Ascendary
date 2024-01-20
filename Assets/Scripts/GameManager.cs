@@ -26,6 +26,9 @@ public class GameManager : MonoBehaviour
 	public Ball ball;
 	public Trajectory trajectory;
 	[SerializeField] float pushForce = 4f;
+	public Animator animator;
+	private Rigidbody2D rb;
+	private SpriteRenderer spriteRenderer;
 
 	bool isDragging = false;
 
@@ -40,6 +43,9 @@ public class GameManager : MonoBehaviour
 	{
 		cam = Camera.main;
 		ball.DesactivateRb();
+		rb = GetComponent<Rigidbody2D>();
+		animator = GetComponent<Animator>();
+		spriteRenderer = GetComponent<SpriteRenderer>();
 	}
 
 	void Update()
@@ -59,6 +65,35 @@ public class GameManager : MonoBehaviour
 		{
 			OnDrag();
 		}
+
+		if (rb.velocity == Vector2.zero)
+        {
+			animator.SetBool("isJumping", false);
+			animator.SetBool("isFalling", false);
+		}
+		else
+        {
+			if (rb.velocity.x < 0)
+			{
+				// Moving to the left
+				spriteRenderer.flipX = true;
+			}
+			else if(rb.velocity.x > 0)
+			{
+				spriteRenderer.flipX = false;
+			}
+			if(rb.velocity.y >= 0)
+            {
+				animator.SetBool("isJumping", true);
+				animator.SetBool("isFalling", false);
+            }
+            else if(rb.velocity.y < 0)
+            {
+				animator.SetBool("isFalling", true);
+				animator.SetBool("isJumping", false);
+			}
+		}
+
 	}
 
 	//-Drag--------------------------------------
